@@ -1,8 +1,12 @@
 package jeppesstudios.dgraf;
 
 import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private View card;
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final int DURATION = 1000;
+    private static final int DURATION = 400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         float fabX = fab.getX() + fab.getWidth() / 2;
         float fabY = fab.getY() + fab.getHeight() / 2;
+        float cardX = card.getX() + card.getWidth() / 2;
+        float cardY = card.getY() + card.getHeight() / 2;
+        float cardXOrigin = card.getX();
+        float cardYOrigin = card.getY();
+
+        FastOutSlowInInterpolator interpolator = new FastOutSlowInInterpolator();
 
         card.setY(fabY - (card.getHeight() / 2));
         card.setX(fabX - (card.getWidth() / 2));
@@ -56,9 +66,31 @@ public class MainActivity extends AppCompatActivity {
                 Math.max(card.getHeight(),card.getWidth()) * 1.5f);
 
         circleRevealAnimator.setDuration(DURATION);
-        circleRevealAnimator.start();
-        fab.animate().alpha(0).setDuration(DURATION / 5).start();
+        fab.animate().alpha(0).setDuration(DURATION / 10).start();
+
+
+        // Animate the color
+        int startColor = fab.getBackgroundTintList().getDefaultColor();
+        int endColor = Color.WHITE; //((ColorDrawable) card.getBackground()).getColor();
+        ObjectAnimator colorAnimator = ObjectAnimator.ofArgb(this, "color", startColor, endColor);
+        colorAnimator.setDuration(DURATION / 6);
+
+        // Animate the position
+        card.animate().x(cardXOrigin).y(cardYOrigin).setInterpolator(interpolator).setDuration(DURATION / 2).start();
+        fab.animate().x(cardX).y(cardY).setDuration(DURATION / 2).start();
+
+        // Animator set
+        AnimatorSet superAnimator = new AnimatorSet();
+        superAnimator.playTogether(circleRevealAnimator, colorAnimator);
+        superAnimator.setInterpolator(new FastOutSlowInInterpolator());
+        superAnimator.start();
         card.setVisibility(View.VISIBLE);
+
+//        circleRevealAnimator.start();
+//        colorAnimator.start();
     }
 
+    private void setColor(int color) {
+        card.setBackgroundColor(color);
+    }
 }
