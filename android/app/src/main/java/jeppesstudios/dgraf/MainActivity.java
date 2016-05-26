@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         card = findViewById(R.id.card);
-
+        card.setZ(fab.getZ());
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         card.setX(fabX - (card.getWidth() / 2));
 
         float startRadius = fab.getWidth() / 2;
+        float endRadius = (float) Math.sqrt(Math.pow(card.getWidth()/2, 2) + Math.pow(card.getHeight()/2, 2));
         Animator circleRevealAnimator = ViewAnimationUtils.createCircularReveal(card,
                 card.getWidth() / 2,
                 card.getHeight() / 2,
                 startRadius,
-                Math.max(card.getHeight(),card.getWidth()) * 1.5f);
+                endRadius);
 
         circleRevealAnimator.setDuration(DURATION);
         fab.animate().alpha(0).setDuration(DURATION / 10).start();
