@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.animation.FastOutSlowInInterpolator;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.animation.PathInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private View card;
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final int DURATION = 400;
+    private static final int DURATION = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void go() {
+
 
         Log.d(TAG, "card x: " + card.getX());
         Log.d(TAG, "card y: " + card.getY());
@@ -67,23 +70,27 @@ public class MainActivity extends AppCompatActivity {
                 endRadius);
 
         circleRevealAnimator.setDuration(DURATION);
-        fab.animate().alpha(0).setDuration(DURATION / 10).start();
+        //fab.animate().alpha(0).setDuration(DURATION / 10).start();
+        fab.setVisibility(View.INVISIBLE);
 
 
         // Animate the color
         int startColor = fab.getBackgroundTintList().getDefaultColor();
         int endColor = Color.WHITE; //((ColorDrawable) card.getBackground()).getColor();
         ObjectAnimator colorAnimator = ObjectAnimator.ofArgb(this, "color", startColor, endColor);
-        colorAnimator.setDuration(DURATION / 6);
+        colorAnimator.setDuration(DURATION);
 
-        // Animate the position
-        card.animate().x(cardXOrigin).y(cardYOrigin).setInterpolator(interpolator).setDuration(DURATION / 2).start();
-        fab.animate().x(cardX).y(cardY).setDuration(DURATION / 2).start();
+        // Path for animating position
+        Path path = new Path();
+        path.moveTo(fabX - (card.getWidth() / 2),fabY - (card.getHeight() / 2));
+        path.quadTo(cardXOrigin, fabY - card.getHeight()*2/3, cardXOrigin, cardYOrigin);
+        ObjectAnimator cardPathAntimator = ObjectAnimator.ofFloat(card, card.X, card.Y, path);
 
         // Animator set
         AnimatorSet superAnimator = new AnimatorSet();
-        superAnimator.playTogether(circleRevealAnimator, colorAnimator);
-        superAnimator.setInterpolator(new FastOutSlowInInterpolator());
+        superAnimator.playTogether(circleRevealAnimator, colorAnimator, cardPathAntimator);
+        superAnimator.setInterpolator(interpolator);
+        superAnimator.setDuration(DURATION);
         superAnimator.start();
         card.setVisibility(View.VISIBLE);
 
