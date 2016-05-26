@@ -10,16 +10,18 @@
     <atom:link href="http://jeppes.github.io/DH2323-project/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Test Post</title>
+      <title>Morph Animation (Rough)</title>
       <link>http://jeppes.github.io/DH2323-project/post/test-test/</link>
       <pubDate>Mon, 23 May 2016 16:16:09 +0200</pubDate>
       
       <guid>http://jeppes.github.io/DH2323-project/post/test-test/</guid>
-      <description>&lt;p&gt;This is our cool post.
-This post is just a test.
-It could have been a real post. But it isn&amp;rsquo;t. It&amp;rsquo;s just a test. Calm down.&lt;/p&gt;
+      <description>&lt;p&gt;The first version of our morph animation!&lt;/p&gt;
 
-&lt;p&gt;Test test.&lt;/p&gt;
+&lt;video width=&#34;240&#34; height=&#34;320&#34; autoplay loop&gt;
+  &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/morph1.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+
+
 </description>
     </item>
     
