@@ -12,21 +12,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.animation.PathInterpolator;
 
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton fab;
     private View card;
+    private PathView pathView;
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private static final int DURATION = 10000;
+    private static final int DURATION = 400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        pathView = (PathView) findViewById(R.id.pathview);
         fab = (FloatingActionButton) findViewById(R.id.fab);
         card = findViewById(R.id.card);
         card.setZ(fab.getZ());
@@ -83,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
         // Path for animating position
         Path path = new Path();
         path.moveTo(fabX - (card.getWidth() / 2),fabY - (card.getHeight() / 2));
-        path.quadTo(cardXOrigin, fabY - card.getHeight()*2/3, cardXOrigin, cardYOrigin);
+        path.quadTo(cardXOrigin, fabY - card.getHeight() * 4/7, cardXOrigin, cardYOrigin);
+//        pathView.initWithPath(path);
         ObjectAnimator cardPathAntimator = ObjectAnimator.ofFloat(card, card.X, card.Y, path);
 
         // Animator set
@@ -94,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         superAnimator.start();
         card.setVisibility(View.VISIBLE);
 
+        pathView.bringToFront();
+
 //        circleRevealAnimator.start();
 //        colorAnimator.start();
     }
@@ -101,4 +105,5 @@ public class MainActivity extends AppCompatActivity {
     private void setColor(int color) {
         card.setBackgroundColor(color);
     }
+
 }
