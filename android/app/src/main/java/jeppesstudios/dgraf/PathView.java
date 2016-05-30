@@ -32,7 +32,6 @@ public class PathView extends View {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-
     public void initWithPath(Path path) {
         tracePaint = new Paint();
         tracePaint.setColor(Color.BLACK);
