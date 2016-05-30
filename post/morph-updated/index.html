@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/skeleton.css">
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/custom.css">
 <link rel="alternate" href="http://jeppes.github.io/DH2323-project/index.xml" type="application/rss+xml" title="DH2323 Blog">
-<title>DH2323 Blog</title>
+<title>Arbitrary Morph Animations - DH2323 Blog</title>
 </head>
 <body>
 
@@ -20,27 +20,41 @@
 		<div class="header-logo">
 			<a href="http://jeppes.github.io/DH2323-project/"><img src="http://jeppes.github.io/DH2323-project/images/logo.jpg" width="60" height="60" alt="DH2323 Blog"></a>
 		</div>
-		<h1 class="site-title">DH2323 Blog</h1>
+		
 	</header>
 
 
 	<main role="main">
-
-		<article itemscope itemtype="http://schema.org/Blog">
-			<h2 class="entry-title" itemprop="headline"><a href="http://jeppes.github.io/DH2323-project/post/morph-updated/">Arbitrary Morph Animations</a></h2>
+		<article itemscope itemtype="http://schema.org/BlogPosting">
+			<h1 class="entry-title" itemprop="headline">Arbitrary Morph Animations</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-05-30">May 30, 2016</time></span>
-		</article>
+			<section itemprop="entry-text">
+				
 
-		<article itemscope itemtype="http://schema.org/Blog">
-			<h2 class="entry-title" itemprop="headline"><a href="http://jeppes.github.io/DH2323-project/post/test-test/">Morph Animation (Rough)</a></h2>
-			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-05-25">May 25, 2016</time></span>
-		</article>
+<h2 id="reversing-the-animation:841e12661b38e943506a29031bf30048">Reversing the animation</h2>
 
-		<article itemscope itemtype="http://schema.org/Blog">
-			<h2 class="entry-title" itemprop="headline"><a href="http://jeppes.github.io/DH2323-project/post/project-specification/">Project Specification</a></h2>
-			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-05-24">May 24, 2016</time></span>
-		</article>
+<p>The morph animation can now be reversed as shown in the following clip</p>
 
+<video width="auto" height="298" autoplay loop>
+  <source src="http://jeppes.github.io/DH2323-project/videos/morph-to-bottom.mp4" type="video/mp4">
+</video>
+
+
+
+<p>Note the arc of the path. This effect is achieved by translating the view along a quadradic bezier path which is calculated based on the positions of the two views relative to one-another. The icon in the floating action button is also faded, which results in a smoother transition between the two views.</p>
+
+<h2 id="arbitary-positions:841e12661b38e943506a29031bf30048">Arbitary Positions</h2>
+
+<p>The animation works for arbitrary positions:</p>
+
+<p><video width="auto" height="298" autoplay loop>
+  <source src="http://jeppes.github.io/DH2323-project/videos/morph-to-middle.mp4" type="video/mp4">
+</video>
+
+</p>
+
+			</section>
+		</article>
 	</main>
 
 
@@ -64,4 +78,3 @@
 
 </body>
 </html>
-
