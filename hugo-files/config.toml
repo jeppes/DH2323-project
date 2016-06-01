@@ -1,7 +1,0 @@
-baseurl = "http://jeppes.github.io/DH2323-project/"
-languageCode = "en-us"
-title = "DH2323 Blog"
-canonifyurls = true
-
-[Params]
-  logo   = "/images/logo.jpg" 
