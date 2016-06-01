@@ -1,4 +1,4 @@
-package jeppesstudios.dgraf;
+package jeppesstudios.dgraf.morph;
 
 import android.animation.Animator;
 import android.animation.AnimatorSet;

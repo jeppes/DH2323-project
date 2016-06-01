@@ -1,4 +1,4 @@
-package jeppesstudios.dgraf;
+package jeppesstudios.dgraf.morph;
 
 import android.content.Context;
 import android.graphics.Canvas;
