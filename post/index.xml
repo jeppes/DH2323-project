@@ -6,8 +6,22 @@
     <description>Recent content in Posts on DH2323 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 May 2016 15:45:55 +0200</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jun 2016 14:26:23 +0200</lastBuildDate>
     <atom:link href="http://jeppes.github.io/DH2323-project/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Radial Reaction</title>
+      <link>http://jeppes.github.io/DH2323-project/post/radial_reaction/</link>
+      <pubDate>Wed, 01 Jun 2016 14:26:23 +0200</pubDate>
+      
+      <guid>http://jeppes.github.io/DH2323-project/post/radial_reaction/</guid>
+      <description>&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
+  &lt;source src=&#34;videos/radial_reaction.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+
+
+</description>
+    </item>
     
     <item>
       <title>Arbitrary Morph Animations</title>
