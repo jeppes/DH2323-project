@@ -5,4 +5,4 @@ title = "Radial Reaction"
 
 +++
 
-{{< mp4 src="videos/radial_reaction.mp4" >}}
+{{< mp4 src="/videos/radial_reaction.mp4" >}}
