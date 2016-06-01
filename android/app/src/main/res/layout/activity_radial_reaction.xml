@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".radial.RadialReactionActivity"
@@ -9,6 +10,11 @@
     android:paddingEnd="6dp">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <jeppesstudios.dgraf.radial.RadialView
+        android:id="@+id/radial_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>
