@@ -19,6 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".radial.RadialReactionActivity" />
+        <activity android:name=".toolbar.ToolbarActivity"
+            android:theme="@style/ToolbarAppTheme"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

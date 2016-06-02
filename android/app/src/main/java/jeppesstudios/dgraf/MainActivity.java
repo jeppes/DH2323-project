@@ -7,6 +7,7 @@ import android.view.View;
 
 import jeppesstudios.dgraf.radial.RadialReactionActivity;
 import jeppesstudios.dgraf.morph.MorphActivity;
+import jeppesstudios.dgraf.toolbar.ToolbarActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.morph_button).setOnClickListener(this);
         findViewById(R.id.radial_button).setOnClickListener(this);
+        findViewById(R.id.toolbar_button).setOnClickListener(this);
     }
 
     @Override
@@ -27,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.radial_button:
                 intent = new Intent(this, RadialReactionActivity.class);
+                break;
+            case R.id.toolbar_button:
+                intent = new Intent(this, ToolbarActivity.class);
                 break;
         }
         startActivity(intent);
