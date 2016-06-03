@@ -24,4 +24,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Toolbar"/>
+    <Button
+        android:id="@+id/drag_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Drag N Drop"/>
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import jeppesstudios.dgraf.drag.DragActivity;
 import jeppesstudios.dgraf.radial.RadialReactionActivity;
 import jeppesstudios.dgraf.morph.MorphActivity;
 import jeppesstudios.dgraf.toolbar.ToolbarActivity;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.morph_button).setOnClickListener(this);
         findViewById(R.id.radial_button).setOnClickListener(this);
         findViewById(R.id.toolbar_button).setOnClickListener(this);
+        findViewById(R.id.drag_button).setOnClickListener(this);
     }
 
     @Override
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.toolbar_button:
                 intent = new Intent(this, ToolbarActivity.class);
+                break;
+            case R.id.drag_button:
+                intent = new Intent(this, DragActivity.class);
                 break;
         }
         startActivity(intent);

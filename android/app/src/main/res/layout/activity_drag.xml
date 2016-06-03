@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jeppesstudios.dgraf.drag.DraggableFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="jeppesstudios.dgraf.drag.DragActivity"
+    android:background="#eee">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1000dp"
+                android:text="asdf" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1000dp"
+                android:text="asdf" />
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</jeppesstudios.dgraf.drag.DraggableFrameLayout>

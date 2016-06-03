@@ -13,5 +13,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+    <style name="DragAppTheme" parent="ToolbarAppTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
 
 </resources>
