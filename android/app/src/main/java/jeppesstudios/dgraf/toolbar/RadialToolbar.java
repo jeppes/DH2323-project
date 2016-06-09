@@ -2,7 +2,6 @@ package jeppesstudios.dgraf.toolbar;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +13,6 @@ import android.view.WindowInsets;
 /**
  * Created by jakob on 02/06/16.
  */
-//@CoordinatorLayout.DefaultBehavior(RadialToolbarBehavior.class)
 public class RadialToolbar extends Toolbar {
     private final String TAG = RadialToolbar.class.getSimpleName();
 

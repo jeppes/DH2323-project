@@ -17,7 +17,7 @@ public class RadialView extends View{
 
     private static final String TAG = RadialView.class.getSimpleName();
 
-    private int DURATION = 500;
+    private int DURATION = 400;
 
     private float radiusProgress = 0.0f;
     private float radius = -1.0f;
@@ -91,16 +91,6 @@ public class RadialView extends View{
         float distToBottomLeft = (float) Math.sqrt(Math.pow(0 - clipRect.centerX(), 2) + Math.pow(0 - clipRect.centerY(), 2));
 
         radius = Math.max(distToBottomLeft, Math.max(distToBottomRight, Math.max(distToTopLeft, distToTopRight)));
-
-        // Setup a gradient for the paint
-//        int centerColor = Color.parseColor("#eeeeee");
-//        int edgeColor1 = Color.parseColor("#cceeeeee");
-//        int edgeColor2 = Color.parseColor("#aaeeeeee");
-//        int edgeColor3 = Color.parseColor("#77eeeeee");
-//        int edgeColor4 = Color.parseColor("#44eeeeee");
-//        int colors[] = new int[]{centerColor, edgeColor1, edgeColor2, edgeColor3, edgeColor4};
-//        float stops[] = new float[]{radius, radius, radius, radius, radius};
-//        paint.setShader(new RadialGradient(clipRect.centerX(), clipRect.centerY(), radius * 6, colors, stops, Shader.TileMode.CLAMP));
 
         paint.setColor(color);
 

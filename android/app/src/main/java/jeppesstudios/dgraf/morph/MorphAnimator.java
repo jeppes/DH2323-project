@@ -16,7 +16,7 @@ import android.view.ViewAnimationUtils;
 public class MorphAnimator {
 
     private static final String TAG = MorphAnimator.class.getSimpleName();
-    private static final int DURATION = 400;
+    private static final int DURATION = 10000;
 
     private FastOutSlowInInterpolator interpolator;
     private float startViewX;
@@ -105,7 +105,7 @@ public class MorphAnimator {
         Path path = setupPathAnimator(false);
         Animator cardPathAntimator = ObjectAnimator.ofFloat(endView, endView.X, endView.Y, path);
         cardPathAntimator.setDuration(DURATION);
-        path.offset(endView.getWidth() / 2 - startView.getWidth() / 2, endView.getHeight() / 2 - endView.getHeight() / 2);
+        path.offset(endView.getWidth() / 2 - startView.getWidth() / 2, endView.getHeight() / 2 - startView.getHeight() / 2);
         Animator fabPathAntimator = ObjectAnimator.ofFloat(startView, startView.X, startView.Y, path);
         fabPathAntimator.setDuration(DURATION);
 
@@ -139,7 +139,7 @@ public class MorphAnimator {
         Path path = setupPathAnimator(true);
         Animator cardPathAntimator = ObjectAnimator.ofFloat(endView, endView.X, endView.Y, path);
         cardPathAntimator.setDuration(DURATION);
-        path.offset(endView.getWidth() / 2 - startView.getWidth() / 2, endView.getHeight() / 2 - endView.getHeight() / 2);
+        path.offset(endView.getWidth() / 2 - startView.getWidth() / 2, endView.getHeight() / 2 - startView.getHeight() / 2);
         startView.setX(endViewXOrigin + endView.getWidth() / 2);
         startView.setY(endViewYOrigin + endView.getHeight() / 2);
         startView.setTranslationX(startViewX - startView.getWidth() / 2);
