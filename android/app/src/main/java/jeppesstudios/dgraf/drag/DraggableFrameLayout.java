@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 /**
- * Created by jakob on 03/06/16.
+ * A layout which can be dismissed by dragging
  */
 public class DraggableFrameLayout extends FrameLayout {
     // The drag distance is the total distance that the layout has been translated from its resting position

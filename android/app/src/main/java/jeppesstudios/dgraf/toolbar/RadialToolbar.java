@@ -34,8 +34,8 @@ public class RadialToolbar extends Toolbar {
     }
 
     public void init(AttributeSet attrs) {
-        // The status bar should 'fitSystemWindows', i.e. allow the system to apply some inset to it.
-        // We will intercept this later to draw under the status bar.
+        // The status bar should 'fitSystemWindows', i.e. allow the system to apply some insets
+        // to it. We will intercept this later to draw under the status bar.
         setFitsSystemWindows(true);
 
         // Get a reference to the current background color and setup the background drawable

@@ -10,7 +10,7 @@ public class DragActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Just set up the layout!
+        // Just set up the layout
         setContentView(R.layout.activity_drag);
     }
 }

@@ -54,7 +54,7 @@ public class MorphAnimator {
             endRadius = temp;
         }
 
-        // Setup the actual cirular reveal animator, be sure to set the visibilities of
+        // Setup the actual circular reveal animator, be sure to set the visibilities of
         // the views accordingly once this animation is run.
         Animator circleRevealAnimator = ViewAnimationUtils.createCircularReveal(endView,
                 endView.getWidth() / 2,
