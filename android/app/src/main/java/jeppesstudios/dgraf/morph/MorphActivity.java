@@ -22,13 +22,14 @@ public class MorphActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // Path view just for debugging
         pathView = (PathView) findViewById(R.id.pathview);
+
+        // Set up the morph animator with the relevant UI components
         fab = (FloatingActionButton) findViewById(R.id.fab);
         card = findViewById(R.id.card);
         card.setZ(fab.getZ());
-
         final MorphAnimator animator = new MorphAnimator(fab, card);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

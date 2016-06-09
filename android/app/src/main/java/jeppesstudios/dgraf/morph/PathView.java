@@ -9,7 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by jespersandstrom on 26/05/16.
+ * This is just a custom view used for drawing the bezier path on the screen.
+ * It is only used for debugging purposes.
  */
 public class PathView extends View {
 
@@ -32,6 +33,9 @@ public class PathView extends View {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+    /*
+        Set a path on this view, once the path has been set it will automatically be drawn to the screen.
+     */
     public void initWithPath(Path path) {
         tracePaint = new Paint();
         tracePaint.setColor(Color.BLACK);
@@ -47,6 +51,7 @@ public class PathView extends View {
         super.onDraw(canvas);
 
         if (tracePath != null && tracePaint != null) {
+            // Draw the path to the screen
             canvas.drawPath(tracePath, tracePaint);
         }
 
