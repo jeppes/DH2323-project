@@ -11,14 +11,18 @@ import android.util.AttributeSet;
 import android.view.View;
 
 /**
- * Created by jespersandstrom on 01/06/16.
+ * This is the view which overlays the grid.
+ * It is responsible for the animation.
+ * After setup, run it with the setRect method
  */
-public class RadialView extends View{
+public class RadialView extends View {
 
     private static final String TAG = RadialView.class.getSimpleName();
 
+    // The duration of the animation
     private int DURATION = 400;
 
+    // State variables
     private float radiusProgress = 0.0f;
     private float radius = -1.0f;
 
@@ -42,6 +46,7 @@ public class RadialView extends View{
     }
 
     private void init() {
+        // Create an animator with a reference to the setRadius() method
         animator = ObjectAnimator.ofFloat(this, "radius", 0.0f, 1.0f);
         animator.setDuration(DURATION);
         animator.setInterpolator(new FastOutSlowInInterpolator());
@@ -50,6 +55,7 @@ public class RadialView extends View{
         paint.setAntiAlias(true);
     }
 
+    // Increase the size of the radius and call invalidate to trigger a redraw.
     public void setRadius(float progress) {
         radiusProgress = progress;
         invalidate();
@@ -59,10 +65,13 @@ public class RadialView extends View{
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // When drawing, clip out the selected element so that it will not be affected.
         if (clipRect != null) {
             canvas.clipRect(clipRect, Region.Op.DIFFERENCE);
         }
 
+        // If the animation is running, draw a circle which will grow in
+        // relation to the current state of the radiusProgress
         if (radiusProgress > 0 && clipRect != null) {
             canvas.drawCircle(clipRect.centerX(), clipRect.centerY(), radius * radiusProgress, paint);
         }
@@ -94,6 +103,7 @@ public class RadialView extends View{
 
         paint.setColor(color);
 
+        // Invalidate the view to trigger a redraw, i.e. onDraw will be run.
         invalidate();
         animator.start();
     }

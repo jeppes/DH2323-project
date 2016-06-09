@@ -15,11 +15,12 @@ public class RadialReactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_radial_reaction);
 
+        // Set up the grid and its overlaying view
         RadialView radialView = (RadialView) findViewById(R.id.radial_view);
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 5));
 
+        // Get the background color for the overlaying view
         TypedArray array = getTheme().obtainStyledAttributes(new int[] {
                 android.R.attr.colorBackground,
         });
