@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/skeleton.css">
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/custom.css">
 <link rel="alternate" href="http://jeppes.github.io/DH2323-project/index.xml" type="application/rss+xml" title="DH2323 Blog">
-<title>Arbitrary Morph Animations - DH2323 Blog</title>
+<title>Updated Morph Animations - DH2323 Blog</title>
 </head>
 <body>
 
@@ -26,14 +26,14 @@
 
 	<main role="main">
 		<article itemscope itemtype="http://schema.org/BlogPosting">
-			<h1 class="entry-title" itemprop="headline">Arbitrary Morph Animations</h1>
+			<h1 class="entry-title" itemprop="headline">Updated Morph Animations</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-05-30">May 30, 2016</time></span>
 			<section itemprop="entry-text">
 				
 
 <h2 id="reversing-the-animation:841e12661b38e943506a29031bf30048">Reversing the animation</h2>
 
-<p>The morph animation can now be reversed as shown in the following clip</p>
+<p>We&rsquo;ve now completed the goals listed in our previous blog post. The animation is now reversible and can transition to arbitrary locations on the screen. The icon of the floating action button can now also be animated along with the view.</p>
 
 <video width="auto" height="298" autoplay loop>
   <source src="http://jeppes.github.io/DH2323-project/videos/morph-to-bottom.mp4" type="video/mp4">
@@ -41,11 +41,9 @@
 
 
 
-<p>Note the arc of the path. This effect is achieved by translating the view along a quadradic bezier path which is calculated based on the positions of the two views relative to one-another. The icon in the floating action button is also faded, which results in a smoother transition between the two views.</p>
+<p>Note the arc of the path. This effect is achieved by translating the view along a quadradic bezier path which is calculated based on the positions of the two views relative to one-another. The floating action button is also animated along this path. This allows us to fade out the icon naturally between the two views, resulting in a more convincing transition.</p>
 
-<h2 id="arbitary-positions:841e12661b38e943506a29031bf30048">Arbitary Positions</h2>
-
-<p>The animation works for arbitrary positions:</p>
+<p>By correcting the path, the view can now be transitioned to any position on the screen:</p>
 
 <p><video width="auto" height="298" autoplay loop>
   <source src="http://jeppes.github.io/DH2323-project/videos/morph-to-middle.mp4" type="video/mp4">

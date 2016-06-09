@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/skeleton.css">
 <link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/custom.css">
 <link rel="alternate" href="http://jeppes.github.io/DH2323-project/index.xml" type="application/rss+xml" title="DH2323 Blog">
-<title>radial toolbar - DH2323 Blog</title>
+<title>Radial Toolbar - DH2323 Blog</title>
 </head>
 <body>
 
@@ -26,14 +26,28 @@
 
 	<main role="main">
 		<article itemscope itemtype="http://schema.org/BlogPosting">
-			<h1 class="entry-title" itemprop="headline">radial toolbar</h1>
+			<h1 class="entry-title" itemprop="headline">Radial Toolbar</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-06-02">June 02, 2016</time></span>
 			<section itemprop="entry-text">
-				<video width="auto" height="298" autoplay loop>
+				
+
+<p>This animation was inspired by the radial reaction theme in material design. The idea was to create a component which would be able to react to changes external to it in the UI. We decided that the toolbar (sometimes referred to as the action bar) would be the perfect component for this. However, we wanted to go one step further and integrate the status bar into this animation as well. By seamlessly unifying these two components we can make the animation even more engaging and natural. For those unfamiliar with Android lingo, the terms toolbar and status bar are explained in the following image:</p>
+
+<p><img src="http://jeppes.github.io/DH2323-project/images/toolb.png" alt="Toolbar/Status bar explanation" /></p>
+
+<p>The following video shows the result of this animation.</p>
+
+<video width="auto" height="298" autoplay loop>
   <source src="http://jeppes.github.io/DH2323-project/videos/toolbar.mp4" type="video/mp4">
 </video>
 
 
+
+<h2 id="implementation:357a2e6a8db00f00a1d120221fdd5ae0">Implementation</h2>
+
+<p>The first problem that needed to be solved was how to draw under the status bar. If only the color of the toolbar changed, the effect would look very out of place. This was solved by first subclassing the existing toolbar class in android. This subclass overrides the methods which deal with responding to system drawing events, specifically with regards to applying system window insets: By default, this method moves the toolbar below the status bar. However, this implementation draws the toolbar underneath the status bar, extending its own height and adding some padding at the top. The result is indistinguishable from an ordinary toolbar, but this enables the status bar color to change automatically as the toolbar animates underneath it (it is important to note that the toolbar is somewhat transparent, so it will automatically darken any colors under it if set up appropriately).</p>
+
+<p>With the custom toolbar in place, the problem of creating the radial animation remained. This was solved by creating a custom drawable (a drawable in android is simple a general abstraction for &ldquo;something that can be drawn.&rdquo; SOURCE). This drawable contains methods for generating a radial animation stemming from a certain point. This is executed in a very similar way to the radial reaction grid animation. This custom drawable can then be set as the background to the toolbar, and hooked up to any click listeners (or event listeners) in the toolbar as desired.</p>
 
 			</section>
 		</article>

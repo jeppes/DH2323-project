@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta name="generator" content="Hugo 0.15" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/normalize.css">
+<link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/skeleton.css">
+<link rel="stylesheet" href="http://jeppes.github.io/DH2323-project/css/custom.css">
+<link rel="alternate" href="http://jeppes.github.io/DH2323-project/index.xml" type="application/rss+xml" title="DH2323 Blog">
+<title>Draggable Layout - DH2323 Blog</title>
+</head>
+<body>
+
+<div class="container">
+
+	<header role="banner">
+		<div class="header-logo">
+			<a href="http://jeppes.github.io/DH2323-project/"><img src="http://jeppes.github.io/DH2323-project/images/logo.jpg" width="60" height="60" alt="DH2323 Blog"></a>
+		</div>
+		
+	</header>
+
+
+	<main role="main">
+		<article itemscope itemtype="http://schema.org/BlogPosting">
+			<h1 class="entry-title" itemprop="headline">Draggable Layout</h1>
+			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-06-09">June 09, 2016</time></span>
+			<section itemprop="entry-text">
+				
+
+<h1 id="continuity-in-layouts:1c44b34cd2b9e5cc60b6e937149c0f48">Continuity in Layouts</h1>
+
+<p>In the pursuit of giving layouts a sense of continuity we implemented the following animation, inspired by Nick Butcher&rsquo;s <a href="https://www.youtube.com/watch?v=EjTJIDKT72M">Google I/O talk</a>.</p>
+
+<p>The idea was to create a layout that a user could drag out of the way to dismiss. The following video shows our implementation:</p>
+
+<p><center>
+<video width="auto" height="298" autoplay loop>
+  <source src="http://jeppes.github.io/DH2323-project/videos/drag_and_drop.mp4" type="video/mp4">
+</video>
+
+
+</center></p>
+
+<p>The layout is dismissed if the user drags it past a certain threshold, otherwise it animates back into place.</p>
+
+<h1 id="implementation:1c44b34cd2b9e5cc60b6e937149c0f48">Implementation</h1>
+
+<p>The first step to creating this was to subclass the FrameLayout in android. This layout is able to listen scrolling events within it. The key is to listen to scroll events which were not consumed by any internal elements, meaning that the user has already scrolled to either the very top or the very bottom. When this occurs and the user keeps scrolling, the layout uses the scroll information to translate itself down (or up if the user is at the bottom of the layout) and scaling itself in the X direction. A logarithmic function is used for the translation and the scaling, so that there is an illusion of the layout resisting the scrolling.</p>
+
+<p>When the user stops scrolling the layout checks if it has been scrolled pasta certain threshold, in which case it animates itself out of frame, or it animates itself back into its original position.</p>
+
+<h1 id="real-world-use:1c44b34cd2b9e5cc60b6e937149c0f48">Real-world Use</h1>
+
+<p>We felt that this animation would fit well in an app we are currenlty developing for THS Armada (a student organization at THS), the following video shows the current state of this:</p>
+
+<p><center>
+<video width="auto" height="298" autoplay loop>
+  <source src="http://jeppes.github.io/DH2323-project/videos/ths_armada.mp4" type="video/mp4">
+</video>
+
+
+</center></p>
+
+<p>We tweaked the code in a few ways to better fit the app. First of all we reduced they amount of X-scaling (the effect was a bit too dramatic in our original implementation). We then changed the dismiss and enter animations slightly to fit this new context.</p>
+
+<p>We feel that this transitions helps stitch together the two layouts, giving the user experience a much greater sense of continuity.</p>
+
+			</section>
+		</article>
+	</main>
+
+
+	<footer role="contentinfo">
+		<div class="hr"></div>
+		<div class="footer-link">
+			
+			
+			
+			
+		</div>
+		<div class="copyright">Copyright &copy; </div>
+	</footer>
+
+</div>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

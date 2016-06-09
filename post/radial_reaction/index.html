@@ -29,11 +29,17 @@
 			<h1 class="entry-title" itemprop="headline">Radial Reaction</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-06-01">June 01, 2016</time></span>
 			<section itemprop="entry-text">
-				<video width="auto" height="298" autoplay loop>
+				<p>This animation was directly inspired by <a href="https://material.google.com/motion/choreography.html#choreography-radial-reaction">this</a> animation in the Material Design Guidelines.</p>
+
+<p>The idea is that a a grid of elements should be able to react to a single element being selected within it. Touching an element should isolate it and cause all of the other elements to fade away in a cascading fashion away from it. The following video shows the results of our implementation:</p>
+
+<video width="auto" height="298" autoplay loop>
   <source src="http://jeppes.github.io/DH2323-project/videos/radial_reaction.mp4" type="video/mp4">
 </video>
 
 
+
+<p>The first challenge we encountered was drawing over the rest of the grid. We solved this by overlaying a transparent view over the rest of the grid. When an element is selected, its bounds are calculated relative to this overlaying view and the screen. These bounds are then clipped out of overlaying view, so that if the overlaying view were made transparent only the selected element would be visible. We then animate the color of this overlaying view from transparent to opaque in a pattern spreading outward from the center of the selected element.</p>
 
 			</section>
 		</article>

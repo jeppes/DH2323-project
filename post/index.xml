@@ -6,20 +6,82 @@
     <description>Recent content in Posts on DH2323 Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 02 Jun 2016 16:16:29 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jun 2016 14:17:05 +0200</lastBuildDate>
     <atom:link href="http://jeppes.github.io/DH2323-project/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>radial toolbar</title>
+      <title>Draggable Layout</title>
+      <link>http://jeppes.github.io/DH2323-project/post/draggable-layout/</link>
+      <pubDate>Thu, 09 Jun 2016 14:17:05 +0200</pubDate>
+      
+      <guid>http://jeppes.github.io/DH2323-project/post/draggable-layout/</guid>
+      <description>
+
+&lt;h1 id=&#34;continuity-in-layouts:1c44b34cd2b9e5cc60b6e937149c0f48&#34;&gt;Continuity in Layouts&lt;/h1&gt;
+
+&lt;p&gt;In the pursuit of giving layouts a sense of continuity we implemented the following animation, inspired by Nick Butcher&amp;rsquo;s &lt;a href=&#34;https://www.youtube.com/watch?v=EjTJIDKT72M&#34;&gt;Google I/O talk&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The idea was to create a layout that a user could drag out of the way to dismiss. The following video shows our implementation:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
+  &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/drag_and_drop.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+
+
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The layout is dismissed if the user drags it past a certain threshold, otherwise it animates back into place.&lt;/p&gt;
+
+&lt;h1 id=&#34;implementation:1c44b34cd2b9e5cc60b6e937149c0f48&#34;&gt;Implementation&lt;/h1&gt;
+
+&lt;p&gt;The first step to creating this was to subclass the FrameLayout in android. This layout is able to listen scrolling events within it. The key is to listen to scroll events which were not consumed by any internal elements, meaning that the user has already scrolled to either the very top or the very bottom. When this occurs and the user keeps scrolling, the layout uses the scroll information to translate itself down (or up if the user is at the bottom of the layout) and scaling itself in the X direction. A logarithmic function is used for the translation and the scaling, so that there is an illusion of the layout resisting the scrolling.&lt;/p&gt;
+
+&lt;p&gt;When the user stops scrolling the layout checks if it has been scrolled pasta certain threshold, in which case it animates itself out of frame, or it animates itself back into its original position.&lt;/p&gt;
+
+&lt;h1 id=&#34;real-world-use:1c44b34cd2b9e5cc60b6e937149c0f48&#34;&gt;Real-world Use&lt;/h1&gt;
+
+&lt;p&gt;We felt that this animation would fit well in an app we are currenlty developing for THS Armada (a student organization at THS), the following video shows the current state of this:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
+  &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/ths_armada.mp4&#34; type=&#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+
+
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;We tweaked the code in a few ways to better fit the app. First of all we reduced they amount of X-scaling (the effect was a bit too dramatic in our original implementation). We then changed the dismiss and enter animations slightly to fit this new context.&lt;/p&gt;
+
+&lt;p&gt;We feel that this transitions helps stitch together the two layouts, giving the user experience a much greater sense of continuity.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Radial Toolbar</title>
       <link>http://jeppes.github.io/DH2323-project/post/radial-toolbar/</link>
       <pubDate>Thu, 02 Jun 2016 16:16:29 +0200</pubDate>
       
       <guid>http://jeppes.github.io/DH2323-project/post/radial-toolbar/</guid>
-      <description>&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
+      <description>
+
+&lt;p&gt;This animation was inspired by the radial reaction theme in material design. The idea was to create a component which would be able to react to changes external to it in the UI. We decided that the toolbar (sometimes referred to as the action bar) would be the perfect component for this. However, we wanted to go one step further and integrate the status bar into this animation as well. By seamlessly unifying these two components we can make the animation even more engaging and natural. For those unfamiliar with Android lingo, the terms toolbar and status bar are explained in the following image:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://jeppes.github.io/DH2323-project/images/toolb.png&#34; alt=&#34;Toolbar/Status bar explanation&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The following video shows the result of this animation.&lt;/p&gt;
+
+&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
   &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/toolbar.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 
+
+&lt;h2 id=&#34;implementation:357a2e6a8db00f00a1d120221fdd5ae0&#34;&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;The first problem that needed to be solved was how to draw under the status bar. If only the color of the toolbar changed, the effect would look very out of place. This was solved by first subclassing the existing toolbar class in android. This subclass overrides the methods which deal with responding to system drawing events, specifically with regards to applying system window insets: By default, this method moves the toolbar below the status bar. However, this implementation draws the toolbar underneath the status bar, extending its own height and adding some padding at the top. The result is indistinguishable from an ordinary toolbar, but this enables the status bar color to change automatically as the toolbar animates underneath it (it is important to note that the toolbar is somewhat transparent, so it will automatically darken any colors under it if set up appropriately).&lt;/p&gt;
+
+&lt;p&gt;With the custom toolbar in place, the problem of creating the radial animation remained. This was solved by creating a custom drawable (a drawable in android is simple a general abstraction for &amp;ldquo;something that can be drawn.&amp;rdquo; SOURCE). This drawable contains methods for generating a radial animation stemming from a certain point. This is executed in a very similar way to the radial reaction grid animation. This custom drawable can then be set as the background to the toolbar, and hooked up to any click listeners (or event listeners) in the toolbar as desired.&lt;/p&gt;
 </description>
     </item>
     
@@ -29,16 +91,22 @@
       <pubDate>Wed, 01 Jun 2016 14:26:23 +0200</pubDate>
       
       <guid>http://jeppes.github.io/DH2323-project/post/radial_reaction/</guid>
-      <description>&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
+      <description>&lt;p&gt;This animation was directly inspired by &lt;a href=&#34;https://material.google.com/motion/choreography.html#choreography-radial-reaction&#34;&gt;this&lt;/a&gt; animation in the Material Design Guidelines.&lt;/p&gt;
+
+&lt;p&gt;The idea is that a a grid of elements should be able to react to a single element being selected within it. Touching an element should isolate it and cause all of the other elements to fade away in a cascading fashion away from it. The following video shows the results of our implementation:&lt;/p&gt;
+
+&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
   &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/radial_reaction.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
 
+
+&lt;p&gt;The first challenge we encountered was drawing over the rest of the grid. We solved this by overlaying a transparent view over the rest of the grid. When an element is selected, its bounds are calculated relative to this overlaying view and the screen. These bounds are then clipped out of overlaying view, so that if the overlaying view were made transparent only the selected element would be visible. We then animate the color of this overlaying view from transparent to opaque in a pattern spreading outward from the center of the selected element.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Arbitrary Morph Animations</title>
+      <title>Updated Morph Animations</title>
       <link>http://jeppes.github.io/DH2323-project/post/morph-updated/</link>
       <pubDate>Mon, 30 May 2016 15:45:55 +0200</pubDate>
       
@@ -47,7 +115,7 @@
 
 &lt;h2 id=&#34;reversing-the-animation:841e12661b38e943506a29031bf30048&#34;&gt;Reversing the animation&lt;/h2&gt;
 
-&lt;p&gt;The morph animation can now be reversed as shown in the following clip&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve now completed the goals listed in our previous blog post. The animation is now reversible and can transition to arbitrary locations on the screen. The icon of the floating action button can now also be animated along with the view.&lt;/p&gt;
 
 &lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
   &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/morph-to-bottom.mp4&#34; type=&#34;video/mp4&#34;&gt;
@@ -55,11 +123,9 @@
 
 
 
-&lt;p&gt;Note the arc of the path. This effect is achieved by translating the view along a quadradic bezier path which is calculated based on the positions of the two views relative to one-another. The icon in the floating action button is also faded, which results in a smoother transition between the two views.&lt;/p&gt;
+&lt;p&gt;Note the arc of the path. This effect is achieved by translating the view along a quadradic bezier path which is calculated based on the positions of the two views relative to one-another. The floating action button is also animated along this path. This allows us to fade out the icon naturally between the two views, resulting in a more convincing transition.&lt;/p&gt;
 
-&lt;h2 id=&#34;arbitary-positions:841e12661b38e943506a29031bf30048&#34;&gt;Arbitary Positions&lt;/h2&gt;
-
-&lt;p&gt;The animation works for arbitrary positions:&lt;/p&gt;
+&lt;p&gt;By correcting the path, the view can now be transitioned to any position on the screen:&lt;/p&gt;
 
 &lt;p&gt;&lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
   &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/morph-to-middle.mp4&#34; type=&#34;video/mp4&#34;&gt;
@@ -71,11 +137,13 @@
     
     <item>
       <title>Morph Animation (Rough)</title>
-      <link>http://jeppes.github.io/DH2323-project/post/test-test/</link>
+      <link>http://jeppes.github.io/DH2323-project/post/morph-rough/</link>
       <pubDate>Wed, 25 May 2016 16:16:09 +0200</pubDate>
       
-      <guid>http://jeppes.github.io/DH2323-project/post/test-test/</guid>
-      <description>&lt;p&gt;The first version of our morph animation!&lt;/p&gt;
+      <guid>http://jeppes.github.io/DH2323-project/post/morph-rough/</guid>
+      <description>
+
+&lt;p&gt;The following clip shows our first attempt at implementing the morphing floating action button animation.&lt;/p&gt;
 
 &lt;video width=&#34;auto&#34; height=&#34;298&#34; autoplay loop&gt;
   &lt;source src=&#34;http://jeppes.github.io/DH2323-project/videos/morph1.mp4&#34; type=&#34;video/mp4&#34;&gt;
@@ -83,7 +151,21 @@
 
 
 
-&lt;p&gt;The animation is currently not reversible, and it relies on the static positions of each views. Our goal is to free it from these constraints and thereby make it re-useable.&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+
+&lt;h2 id=&#34;current-state-of-the-animation:0b89c0c6ea6646ba3bf21d86d452fa52&#34;&gt;Current state of the animation&lt;/h2&gt;
+
+&lt;p&gt;Several steps are required to create the illusion of the first view morphing into the second. The first step involves super-imposing the second view over the first. The position is adjusted so that the two views share the same center point. The color and shape of the second view are adjusted to exactly match the first view. This means that we can now remove the first view entirely. Finally the animation can begin. The second view is translated to its final position. Whilst this is happening, the visible bounds of the view are expanded in a radial motion until the entire view is visible. The radius is this circle is simply the distance from the view&amp;rsquo;s origin to its center. The color of this view is also changed during this process.&lt;/p&gt;
+
+&lt;p&gt;Another key component of this animation is the path that the second view is translated along. We want to create the illusion that natural forces are affecting this transition, so the view follows a non-linear path. We achieve this effect by calculating a quadratic bezier path between the start and end locations.&lt;/p&gt;
+
+&lt;h2 id=&#34;goals:0b89c0c6ea6646ba3bf21d86d452fa52&#34;&gt;Goals&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The animation should be reversible&lt;/li&gt;
+&lt;li&gt;Any content in the floating action button (such as icons) should transition smoothly.&lt;/li&gt;
+&lt;li&gt;The floating action button should be able to morph into views at arbitrary locations on the screen.&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
@@ -118,7 +200,8 @@ Implementing a morphing/merging animation between views. One view should be able
   &lt;source src=&#34;http://material-design.storage.googleapis.com/publish/material_v_8/material_ext_publish/0B8v7jImPsDi-bWxnMGxHUFdKbkU/components-buttons-fab-transition_morph_01.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
- &lt;/center&gt;&lt;/p&gt;
+ &lt;/center&gt;
+&lt;center&gt;(Video source: &lt;a href=&#34;https://material.google.com/&#34;&gt;https://material.google.com/&lt;/a&gt;)&lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;animation-philosophy:76392fa21d1c6db2bd12d64d37f25450&#34;&gt;Animation Philosophy&lt;/h1&gt;
 
@@ -137,7 +220,8 @@ Implementing a morphing/merging animation between views. One view should be able
   &lt;source src=&#34;http://material-design.storage.googleapis.com/publish/material_v_8/material_ext_publish/0B14F_FSUCc01SktIam0yei0wSnM/Natural_02_Arc-v3.mp4&#34; type=&#34;video/mp4&#34;&gt;
 &lt;/video&gt;
 
- &lt;/center&gt;&lt;/p&gt;
+ &lt;/center&gt;
+&lt;center&gt;(Video source: &lt;a href=&#34;https://material.google.com/&#34;&gt;https://material.google.com/&lt;/a&gt;)&lt;/center&gt;&lt;/p&gt;
 
 &lt;h1 id=&#34;implementation-details:76392fa21d1c6db2bd12d64d37f25450&#34;&gt;Implementation Details&lt;/h1&gt;
 

@@ -29,7 +29,9 @@
 			<h1 class="entry-title" itemprop="headline">Morph Animation (Rough)</h1>
 			<span class="entry-meta"><time itemprop="datePublished" datetime="2016-05-25">May 25, 2016</time></span>
 			<section itemprop="entry-text">
-				<p>The first version of our morph animation!</p>
+				
+
+<p>The following clip shows our first attempt at implementing the morphing floating action button animation.</p>
 
 <video width="auto" height="298" autoplay loop>
   <source src="http://jeppes.github.io/DH2323-project/videos/morph1.mp4" type="video/mp4">
@@ -37,7 +39,21 @@
 
 
 
-<p>The animation is currently not reversible, and it relies on the static positions of each views. Our goal is to free it from these constraints and thereby make it re-useable.</p>
+<p>&nbsp;</p>
+
+<h2 id="current-state-of-the-animation:0b89c0c6ea6646ba3bf21d86d452fa52">Current state of the animation</h2>
+
+<p>Several steps are required to create the illusion of the first view morphing into the second. The first step involves super-imposing the second view over the first. The position is adjusted so that the two views share the same center point. The color and shape of the second view are adjusted to exactly match the first view. This means that we can now remove the first view entirely. Finally the animation can begin. The second view is translated to its final position. Whilst this is happening, the visible bounds of the view are expanded in a radial motion until the entire view is visible. The radius is this circle is simply the distance from the view&rsquo;s origin to its center. The color of this view is also changed during this process.</p>
+
+<p>Another key component of this animation is the path that the second view is translated along. We want to create the illusion that natural forces are affecting this transition, so the view follows a non-linear path. We achieve this effect by calculating a quadratic bezier path between the start and end locations.</p>
+
+<h2 id="goals:0b89c0c6ea6646ba3bf21d86d452fa52">Goals</h2>
+
+<ul>
+<li>The animation should be reversible</li>
+<li>Any content in the floating action button (such as icons) should transition smoothly.</li>
+<li>The floating action button should be able to morph into views at arbitrary locations on the screen.</li>
+</ul>
 
 			</section>
 		</article>
