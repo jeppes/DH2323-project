@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Set up buttons for switching between all the different animation samples.
         findViewById(R.id.morph_button).setOnClickListener(this);
         findViewById(R.id.radial_button).setOnClickListener(this);
         findViewById(R.id.toolbar_button).setOnClickListener(this);

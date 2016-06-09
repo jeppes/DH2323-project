@@ -12,15 +12,19 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import java.util.Random;
 
 /**
- * Created by jakob on 02/06/16.
+ * A custom drawable which can be used as the background for the toolbar.
+ * This drawable will draw a spreading circle animation depending on
+ * where it is touched with a random color.
  */
 public class RadialDrawable extends Drawable implements Animator.AnimatorListener {
 
     private static final String TAG = RadialDrawable.class.getSimpleName();
 
-    private int color;
+    // The location that the animation stems from
     private float touchX = -1;
     private float touchY = -1;
+
+    private int color;
     private Paint paint;
     private ObjectAnimator animator;
     private float progress;
@@ -30,6 +34,8 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
     public RadialDrawable(int color) {
         this.color = color;
         paint = new Paint();
+
+        // Setup an animator with a reference to the setProgress() method
         animator = ObjectAnimator.ofFloat(this, "progress", 0, 1);
         animator.setInterpolator(new FastOutSlowInInterpolator());
         animator.addListener(this);
@@ -37,8 +43,10 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
 
     @Override
     public void draw(Canvas canvas) {
+        // Draw the background color of this view
         canvas.drawColor(color);
 
+        // If an origin has been set, draw a circle stemming from that point
         if(touchX != -1) {
             canvas.drawCircle(touchX, touchY, radius * progress, paint);
         }
@@ -60,6 +68,7 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
         return 0;
     }
 
+    // Set the current state of the radius and invalidate to trigger a redraw
     private void setProgress(float progress) {
         this.progress = progress;
         invalidateSelf();
@@ -73,6 +82,7 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
         float height = rect.height();
         float width = rect.width();
 
+        // Calulate the radius
         float distToTopRight = (float) Math.sqrt(Math.pow(width - x, 2) + Math.pow(0 - y, 2));
         float distToTopLeft = (float) Math.sqrt(Math.pow(0 - x, 2) + Math.pow(0 - y, 2));
         float distToBottomRight = (float) Math.sqrt(Math.pow(width - x, 2) + Math.pow(height - y, 2));
@@ -80,6 +90,8 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
 
         radius = Math.max(distToBottomLeft, Math.max(distToBottomRight, Math.max(distToTopLeft, distToTopRight)));
 
+        // Set a random color, this could easily be changed to allow the
+        // calling class to inject a color if desired
         Random random = new Random();
         paint.setARGB(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
@@ -89,6 +101,7 @@ public class RadialDrawable extends Drawable implements Animator.AnimatorListene
 
     @Override
     public void onAnimationEnd(Animator animation) {
+        // When the animation is done, set the new background color
         color = paint.getColor();
     }
 

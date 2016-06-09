@@ -13,6 +13,8 @@ public class ToolbarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_toolbar);
 
+        // Get a reference to our custom toolbar and set it to be the activity's default toolbar.
+        // Also run setDisplayHomeAsUpEnabled() which will give the toolbar a back button.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

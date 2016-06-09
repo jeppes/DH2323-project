@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.WindowInsets;
 
 /**
- * Created by jakob on 02/06/16.
+ * A custom toolbar which draws itself under the status bar and adjusts its size accordingly.
  */
 public class RadialToolbar extends Toolbar {
     private final String TAG = RadialToolbar.class.getSimpleName();
@@ -34,7 +34,12 @@ public class RadialToolbar extends Toolbar {
     }
 
     public void init(AttributeSet attrs) {
+        // The status bar should 'fitSystemWindows', i.e. allow the system to apply some inset to it.
+        // We will intercept this later to draw under the status bar.
         setFitsSystemWindows(true);
+
+        // Get a reference to the current background color and setup the background drawable
+        // (see radial drawable class)
         int color = ((ColorDrawable)getBackground()).getColor();
         radialDrawable = new RadialDrawable(color);
         setBackground(radialDrawable);
@@ -42,6 +47,10 @@ public class RadialToolbar extends Toolbar {
 
     @Override
     public WindowInsets onApplyWindowInsets(WindowInsets insets) {
+        // The system is attempting to apply insets to this toolbar, intercept these and
+        // change the height of the toolbar instead. Then set some padding so that any
+        // content drawn within the toolbar will appear at the proper position.
+        // This method may be called several times, so only do this once.
         if (!insetsApplied) {
             setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
             int height = getLayoutParams().height + insets.getSystemWindowInsetTop();
@@ -54,7 +63,7 @@ public class RadialToolbar extends Toolbar {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        Log.d(TAG, "onTouchEvent: " + ev.getX() + "," + ev.getY());
+        // Listen for touch events and send them to the background drawable.
         radialDrawable.radiateFromPoint(ev.getX(), ev.getY());
         return super.onTouchEvent(ev);
     }
